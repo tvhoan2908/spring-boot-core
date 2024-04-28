@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:14
+    restart: unless-stopped
+    ports:
+      - 5433:5432
+    volumes:
+      - rnd_dbdata:/data/postgres
+    environment:
+      - POSTGRES_USER=xxxx
+      - POSTGRES_PASSWORD=xxxx
+      - POSTGRES_DB=rnd
+
+volumes: 
+  rnd_dbdata:
+    driver: local

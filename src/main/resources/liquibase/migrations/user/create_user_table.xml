@@ -1,0 +1,57 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="Rnd" id="tag_v_1_1">
+        <tagDatabase tag="v_1_1" />
+    </changeSet>
+    <changeSet id="createUserTable-1" author="Rnd">
+        <createTable tableName="users">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="username" type="varchar(100)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="user_username_unique" />
+            </column>
+            <column name="password" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="user_email_unique" />
+            </column>
+            <column name="full_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="status" type="tinyint" remarks="1: ACTIVE, 2: DISABLED, 3: BANNED" defaultValue="1">
+                <constraints nullable="false" />
+            </column>
+            <column name="account_type" type="varchar(50)" remarks="AUTHENTICATED, ADMINISTRATOR, SUPER_ADMIN" defaultValue="AUTHENTICATED">
+                <constraints nullable="false" />
+            </column>
+            <column name="token_expired_at" type="TIMESTAMP" remarks="The day that token expired at">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_by" type="int">
+                <constraints nullable="true" />
+            </column>
+            <column name="updated_by" type="int">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="true" />
+            </column>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="true" />
+            </column>
+            <column name="deleted_at" type="TIMESTAMP">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+        <createIndex tableName="users" indexName="user_deleted_at_idx">
+            <column name="deleted_at"></column>
+        </createIndex>
+        <createIndex tableName="users" indexName="user_status_idx">
+            <column name="status"></column>
+        </createIndex>
+        <rollback>
+            <dropTable tableName="users"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

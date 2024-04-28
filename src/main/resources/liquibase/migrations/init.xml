@@ -1,0 +1,208 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+  <changeSet author="Rnd" id="tag_v_1_2">
+    <tagDatabase tag="v_1_2" />
+  </changeSet>
+  <changeSet id="createTblUser" author="Rnd">
+    <createTable tableName="tbl_users">
+      <column name="id" type="int" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="account" type="varchar(255)"/>
+      <column name="full_name" type="varchar(255)"/>
+      <column name="pass_word" type="varchar(255)"/>
+      <column name="created_at" type="timestamp"/>
+      <column name="updated_at" type="timestamp"/>
+      <column name="updated_by" type="integer"/>
+      <column name="avatar" type="integer"/>
+    </createTable>
+
+    <rollback>
+      <dropTable tableName="tbl_users"/>
+    </rollback>
+  </changeSet>
+
+  <changeSet id="createTblPosts" author="Rnd">
+    <createTable tableName="tbl_posts">
+      <column name="id" type="int" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="title" type="varchar(255)"/>
+      <column name="content" type="text(65535)"/>
+      <column name="created_at" type="timestamp"/>
+      <column name="created_by" type="integer"/>
+      <column name="updated_at" type="timestamp"/>
+      <column name="updated_by" type="integer"/>
+      <column name="category_id" type="integer"/>
+      <column name="thumb_id" type="integer"/>
+      <column name="view_count" type="integer"/>
+      <column name="tag" type="varchar(255)"/>
+    </createTable>
+
+    <rollback>
+      <dropTable tableName="tbl_posts"/>
+    </rollback>
+  </changeSet>
+
+  <changeSet id="createTblMedias" author="Rnd">
+    <createTable tableName="tbl_medias">
+      <column name="id" type="int" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="created_at" type="timestamp"/>
+      <column name="created_by" type="integer"/>
+      <column name="updated_at" type="timestamp"/>
+      <column name="updated_by" type="integer"/>
+      <column name="type" type="int"/>
+      <column name="uri" type="varchar(255)"/>
+    </createTable>
+
+    <rollback>
+      <dropTable tableName="tbl_medias"/>
+    </rollback>
+  </changeSet>
+
+  <changeSet id="createTblCandidates" author="Rnd">
+    <createTable tableName="tbl_candidates">
+      <column name="id" type="int" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="full_name" type="varchar(255)"/>
+      <column name="email" type="varchar(255)"/>
+      <column name="message" type="text(65535)"/>
+      <column name="phone" type="varchar(255)"/>
+      <column name="cv_file" type="bit(1)"/>
+      <column name="job_id" type="integer"/>
+      <column name="status" type="int"/>
+    </createTable>
+    <rollback>
+      <dropTable tableName="tbl_candidates"/>
+    </rollback>
+  </changeSet>
+
+  <changeSet id="createTblJobs" author="Rnd">
+    <createTable tableName="tbl_jobs">
+      <column name="id" type="int" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="title" type="varchar(255)"/>
+      <column name="description" type="text(65535)"/>
+      <column name="job_category_id" type="integer"/>
+      <column name="experience" type="integer"/>
+      <column name="working_time" type="int"/>
+      <column name="salary" type="integer"/>
+      <column name="location_id" type="integer"/>
+      <column name="start_time" type="timestamp"/>
+      <column name="end_time" type="timestamp"/>
+      <column name="contract_type" type="int"/>
+      <column name="number" type="integer"/>
+    </createTable>
+    <rollback>
+      <dropTable tableName="tbl_jobs"/>
+    </rollback>
+  </changeSet>
+
+  <changeSet id="createTblJobCategory" author="Rnd">
+    <createTable tableName="tbl_job_category">
+      <column name="id" type="int" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(255)"/>
+      <column name="tag" type="varchar(255)"/>
+    </createTable>
+    <rollback>
+      <dropTable tableName="tbl_job_category"/>
+    </rollback>
+  </changeSet>
+
+  <changeSet id="createTblJobLocation" author="Rnd">
+    <createTable tableName="tbl_job_location">
+      <column name="id" type="int" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(255)"/>
+      <column name="code" type="varchar(255)"/>
+    </createTable>
+    <rollback>
+      <dropTable tableName="tbl_job_location"/>
+    </rollback>
+  </changeSet>
+
+  <changeSet id="createTblPostCategory" author="Rnd">
+    <createTable tableName="tbl_post_category">
+      <column name="id" type="int" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(255)"/>
+    </createTable>
+    <rollback>
+      <dropTable tableName="tbl_post_category"/>
+    </rollback>
+  </changeSet>
+
+  <changeSet id="createTblServices" author="Rnd">
+    <createTable tableName="tbl_services">
+      <column name="id" type="int" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="title" type="varchar(255)"/>
+      <column name="content" type="text(65535)"/>
+      <column name="created_at" type="timestamp"/>
+      <column name="created_by" type="integer"/>
+      <column name="updated_at" type="timestamp"/>
+      <column name="updated_by" type="integer"/>
+      <column name="category_id" type="integer"/>
+      <column name="thumb_id" type="integer"/>
+      <column name="view_count" type="integer"/>
+      <column name="tag" type="varchar(255)"/>
+    </createTable>
+    <rollback>
+      <dropTable tableName="tbl_services"/>
+    </rollback>
+  </changeSet>
+
+  <changeSet id="createTblServiceCategory" author="Rnd">
+    <createTable tableName="tbl_service_category">
+      <column name="id" type="int" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(255)"/>
+    </createTable>
+    <rollback>
+      <dropTable tableName="tbl_service_category"/>
+    </rollback>
+  </changeSet>
+
+  <changeSet id="addForeignKeyConstraintUserPost" author="Rnd">
+    <addForeignKeyConstraint baseTableName="tbl_posts" baseColumnNames="created_by" constraintName="fk_posts_created_by" referencedTableName="tbl_users" referencedColumnNames="id"/>
+  </changeSet>
+
+  <changeSet id="addForeignKeyConstraintPostMedia" author="Rnd">
+    <addForeignKeyConstraint baseTableName="tbl_posts" baseColumnNames="thumb_id" constraintName="fk_post_medias_id" referencedTableName="tbl_medias" referencedColumnNames="id"/>
+  </changeSet>
+
+  <changeSet id="addForeignKeyConstraintUserAvatar" author="Rnd">
+    <addForeignKeyConstraint baseTableName="tbl_users" baseColumnNames="avatar" constraintName="fk_users_avatar" referencedTableName="tbl_medias" referencedColumnNames="id"/>
+  </changeSet>
+
+  <changeSet id="addForeignKeyConstraintUserJobCategory" author="Rnd">
+    <addForeignKeyConstraint baseTableName="tbl_jobs" baseColumnNames="job_category_id" constraintName="fk_job_category_id" referencedTableName="tbl_job_category" referencedColumnNames="id"/>
+  </changeSet>
+
+  <changeSet id="addForeignKeyConstraintCandidates" author="Rnd">
+    <addForeignKeyConstraint baseTableName="tbl_candidates" baseColumnNames="job_id" constraintName="fk_candidates_job_id" referencedTableName="tbl_jobs" referencedColumnNames="id"/>
+  </changeSet>
+
+  <changeSet id="addForeignKeyConstraintPost" author="Rnd">
+    <addForeignKeyConstraint baseTableName="tbl_posts" baseColumnNames="category_id" constraintName="fk_posts_category_id" referencedTableName="tbl_post_category" referencedColumnNames="id"/>
+  </changeSet>
+
+  <changeSet id="addForeignKeyConstraintService" author="Rnd">
+    <addForeignKeyConstraint baseTableName="tbl_services" baseColumnNames="thumb_id" constraintName="fk_medias_id" referencedTableName="tbl_medias" referencedColumnNames="id"/>
+  </changeSet>
+
+  <changeSet id="addForeignKeyConstraintServiceClg" author="Rnd">
+    <addForeignKeyConstraint baseTableName="tbl_services" baseColumnNames="category_id" constraintName="fk_services_category_id" referencedTableName="tbl_service_category" referencedColumnNames="id"/>
+  </changeSet>
+</databaseChangeLog>

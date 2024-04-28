@@ -1,0 +1,36 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="Rnd" id="tag_v_1_1">
+        <tagDatabase tag="v_1_1" />
+    </changeSet>
+    <changeSet id="createUserRoleTable-1" author="Rnd">
+        <createTable tableName="users_roles">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="role_id" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="true" />
+            </column>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="true" />
+            </column>
+            <column name="deleted_at" type="TIMESTAMP">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+        <createIndex tableName="users_roles" indexName="ur_role_id_idx">
+            <column name="role_id"></column>
+        </createIndex>
+        <createIndex tableName="users_roles" indexName="ur_user_id_idx">
+            <column name="user_id"></column>
+        </createIndex>
+        <rollback>
+            <dropTable tableName="users_roles"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

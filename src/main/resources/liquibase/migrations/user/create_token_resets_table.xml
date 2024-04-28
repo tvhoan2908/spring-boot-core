@@ -1,0 +1,27 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="Rnd" id="tag_v_1_1">
+        <tagDatabase tag="v_1_1" />
+    </changeSet>
+    <changeSet id="createTokenResetsTable-1" author="Rnd">
+        <createTable tableName="token_resets">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="source" type="varchar(255)" remarks="email or phone">
+                <constraints nullable="false" />
+            </column>
+            <column name="token" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="token_type" type="tinyint(1)" remarks="Token type: 1-Reset password..." defaultValue="1">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="token_resets"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
